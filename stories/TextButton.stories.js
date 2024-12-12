@@ -24,11 +24,11 @@ export default {
 };
 
 export const BlackButton = (args) => <TextButtonBlack {...args} />;
-BlackButton.args = { label: 'Hey' };
+BlackButton.args = { label: 'TextButtonBlack' };
 
 export const WhiteButton = (args) => <TextButtonWhite {...args} />;
-WhiteButton.args = { label: 'Hey' };
+WhiteButton.args = { label: 'TextButtonWhite' };
 
 export const ColorButton = (args) => <TextButtonColor {...args} />;
-ColorButton.args = { label: 'Hey', bgColor: '#FB6514' };
+ColorButton.args = { label: 'TextButtonColor', bgColor: '#FB6514' };
 
