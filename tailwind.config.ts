@@ -1,18 +1,12 @@
-import type { Config } from "tailwindcss";
-
-export default {
+module.exports = {
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    './app/**/*.{js,ts,jsx,tsx}', // app 폴더 내 파일들을 포함하여 TailwindCSS 적용
   ],
   theme: {
-    extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-      },
-    },
+    extend: {},
+    fontFamily: {
+      'Pretendard': ['Pretendard']
+    }
   },
   plugins: [],
-} satisfies Config;
+};
