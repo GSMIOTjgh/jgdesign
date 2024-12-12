@@ -10,9 +10,11 @@ jobs:
   chromatic:
     runs-on: ubuntu-latest
     steps:
-      # 코드 체크아웃
+      # 코드 체크아웃 (fetch-depth: 0으로 전체 히스토리 가져오기)
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       # Node.js 설치
       - name: Setup Node.js
@@ -22,7 +24,11 @@ jobs:
 
       # 의존성 설치 (yarn 사용)
       - name: Install dependencies
-        run: yarn
+        run: npm
+
+      # Storybook 빌드
+      - name: Build Storybook
+        run: npm build-storybook
 
       # Chromatic 실행
       - name: Publish Storybook to Chromatic
@@ -30,7 +36,7 @@ jobs:
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
 
-      # Pull Request에 Storybook URL 댓글 추가
+      # PR에 Storybook URL 댓글 추가
       - name: Comment on PR
         if: github.event_name == 'pull_request'
         uses: thollander/actions-comment-pull-request@v1
