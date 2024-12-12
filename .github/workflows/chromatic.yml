@@ -24,11 +24,11 @@ jobs:
 
       # 의존성 설치 (yarn 사용)
       - name: Install dependencies
-        run: npm
+        run: yarn
 
       # Storybook 빌드
       - name: Build Storybook
-        run: npm build-storybook
+        run: yarn build-storybook
 
       # Chromatic 실행
       - name: Publish Storybook to Chromatic
