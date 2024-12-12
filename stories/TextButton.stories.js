@@ -27,7 +27,7 @@ export const BlackButton = (args) => <TextButtonBlack {...args} />;
 BlackButton.args = { label: 'TextButtonBlack' };
 
 export const WhiteButton = (args) => <TextButtonWhite {...args} />;
-WhiteButton.args = { label: 'TextButtonWhite' };
+WhiteButton.args = { label: 'fuckup' };
 
 export const ColorButton = (args) => <TextButtonColor {...args} />;
 ColorButton.args = { label: 'TextButtonColor', bgColor: '#FB6514' };
