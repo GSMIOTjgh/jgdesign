@@ -24,7 +24,7 @@ export default {
 };
 
 export const BlackButton = (args) => <TextButtonBlack {...args} />;
-BlackButton.args = { label: 'about' };
+BlackButton.args = { label: 'TextButtonBlack' };
 
 export const WhiteButton = (args) => <TextButtonWhite {...args} />;
 WhiteButton.args = { label: 'TextButtonWhite' };
