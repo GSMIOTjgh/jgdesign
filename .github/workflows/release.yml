@@ -10,20 +10,48 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1. 레포지토리 체크아웃
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Get tag version
-        id: version
+      # 2. 이전 태그와 비교해 커밋 로그를 카테고리별로 추출
+      - name: Generate Changelog
+        id: changelog
         run: |
-          TAG=${GITHUB_REF#refs/tags/}
-          echo "VERSION=${TAG}" >> $GITHUB_ENV
+          # 파일 초기화
+          echo "## 🚀 New Release: ${{ github.ref_name }}" > changelog.txt
+          echo "" >> changelog.txt
+          
+          # Features 섹션
+          echo "### ✨ Features" >> changelog.txt
+          git log $(git describe --tags --abbrev=0)..HEAD --pretty=format:"- %s [%an]" | grep '^feat:' || echo "- No new features" >> changelog.txt
+          echo "" >> changelog.txt
 
+          # Fixes 섹션
+          echo "### 🐛 Bug Fixes" >> changelog.txt
+          git log $(git describe --tags --abbrev=0)..HEAD --pretty=format:"- %s [%an]" | grep '^fix:' || echo "- No bug fixes" >> changelog.txt
+          echo "" >> changelog.txt
+
+          # Chores 섹션
+          echo "### 🔧 Chores" >> changelog.txt
+          git log $(git describe --tags --abbrev=0)..HEAD --pretty=format:"- %s [%an]" | grep '^chore:' || echo "- No chores" >> changelog.txt
+          echo "" >> changelog.txt
+
+          # 기타 변경 사항
+          echo "### 📋 Other Changes" >> changelog.txt
+          git log $(git describe --tags --abbrev=0)..HEAD --pretty=format:"- %s [%an]" | grep -v -E '^feat:|^fix:|^chore:' || echo "- No other changes" >> changelog.txt
+          echo "" >> changelog.txt
+
+          # 변경된 내용 프린트 (디버깅용)
+          echo "Generated Changelog:"
+          cat changelog.txt
+
+      # 3. GitHub Release 생성
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ env.VERSION }}
-          name: Release ${{ env.VERSION }}
-          body: "New release ${{ env.VERSION }}"
+          tag_name: ${{ github.ref }}
+          name: 🚀 Release ${{ github.ref_name }}
+          body_path: ./changelog.txt
         env:
           GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
