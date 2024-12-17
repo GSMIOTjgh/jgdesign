@@ -3,7 +3,7 @@ name: Create Release on Tag
 on:
   push:
     tags:
-      - 'v*'  # v로 시작하는 태그만 트리거
+      - 'v*'
 
 jobs:
   release:
@@ -26,4 +26,4 @@ jobs:
           name: Release ${{ env.VERSION }}
           body: "New release ${{ env.VERSION }}"
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
