@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://jgdesign-nu.vercel.app/
+Host: https://jgdesign-nu.vercel.app
 
 # Sitemaps
 Sitemap: https://jgdesign-nu.vercel.app/sitemap.xml
