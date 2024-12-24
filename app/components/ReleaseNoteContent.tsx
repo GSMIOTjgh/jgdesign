@@ -48,24 +48,28 @@ const ReleaseNoteContent = () => {
   }
 
   return (
-    <div>
-      <h2 className="text-2xl font-bold">Release Notes</h2>
-      <ul className="mt-4 list-disc list-inside">
-        {releaseNotes.map((release) => (
-          <li key={release.id} className="mt-2">
-            <a
-              href={release.html_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-500 hover:underline"
-            >
-              {release.name} ({new Date(release.published_at).toLocaleDateString()})
-            </a>
-            <p className="text-gray-700">{release.body.split("\n")[0]}</p>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <div>
+        <h2 className="text-2xl font-bold">Release Notes</h2>
+        <ul className="mt-4 list-inside">
+          {releaseNotes.map((release) => (
+            <li key={release.id} className="mt-2 bg-slate-100 rounded-md px-3 py-3 flex-col">
+              <div className="rounded-tl-3xl rounded-br-3xl bg-blue-500 absolute w-5 h-5 my-3 right-10" />
+              <div className="rounded-tr-3xl rounded-bl-3xl bg-blue-500 absolute w-5 h-5 my-3 right-10" />
+              <a
+                href={release.html_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-500 hover:underline" 
+              >
+                {release.name} ({new Date(release.published_at).toLocaleDateString()})
+              </a>
+              <p className="text-gray-700">{release.body.split("\n")[0]}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
   );
 };
 

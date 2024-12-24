@@ -3,7 +3,7 @@ interface SidebarProps {
 }
 
 const Sidebar = ({ setSelectedContent }: SidebarProps) => {
-  const menuItems = ["Installation", "Release Notes", "Storybook UI",];
+  const menuItems = ["Installation", "Release Notes", "Components",];
 
   return (
     <div className="w-80">
